@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manifest Generator</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://actwu.github.io/neu/n.css"/>
+</head>
+<body>
+<cont><p m agr bold>ShareByte</p></cont>
+<layout mbg>
+<span>
+<div></div>
+<layout  btns>
+<cont small-p>
+<p b agr bold>Manifest Generator</p>
+<p b agr small bold>For Minecraft</p>
+</cont>
+<textarea mbg2 b small-p bdr="0"
+style="height:20vh;"
+placeholder="Name" id="dn">
+</textarea>
+<textarea mbg2 small-my b small-p bdr="0"
+style="height:20vh;"
+placeholder="Description" id="dd">
+</textarea>
+<a bbg mid-mb row bdr="0" onmousedown="genManifest()">
+<i m mid class="fa-solid fa-floppy-disk"></i>
+<p m agr bold>export</p>
+</a>
+
+</layout>
+<div></div>
+</span>
+</layout>
+<script>
+function ran(n) {
+return Math.floor(Math.random() *n)
+}
+function uuid() {
+return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+return v.toString(16);
+});
+}
+function genManifest() {
+let dn = document.getElementById("dn");
+let dd = document.getElementById("dd");
+
+const manifest = `
+{
+"format_version": 2,
+"header" : {
+"name" : "${dn.value}",
+"description" : "${dd.value}",
+"uuid" : "${uuid()}",
+"version": [1, 1, 7],
+"min_engine_version": [1, 19, 0]
+},
+"modules" : [
+{
+"version" : [ 1, 1, 6 ],
+"type" : "resources",
+"uuid" : "${uuid()}"
+}
+]
+}`;
+
+const blob = new Blob([manifest], { type: 'application/json' });
+const url = URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url;
+a.download = 'manifest.json';
+a.click();
+URL.revokeObjectURL(url);}
+
+</script>
+</body>
+</html>
