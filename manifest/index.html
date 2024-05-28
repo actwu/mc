@@ -9,15 +9,13 @@
 <link rel="stylesheet" href="https://actwu.github.io/neu/n.css"/>
 </head>
 <body>
-<cont><p m agr bold>ShareByte</p></cont>
-<layout mbg>
-<span>
-<div></div>
-<layout  btns>
-<cont small-p>
+<bg mbg></bg>
+<cont bbg><p m agr bold>ShareByte</p></cont><cont small-p>
 <p b agr bold>Manifest Generator</p>
 <p b agr small bold>For Minecraft</p>
 </cont>
+<layout mid-m btns>
+
 <textarea mbg2 b small-p bdr="0"
 style="height:20vh;"
 placeholder="Name" id="dn">
@@ -26,14 +24,13 @@ placeholder="Name" id="dn">
 style="height:20vh;"
 placeholder="Description" id="dd">
 </textarea>
-<a bbg mid-mb row bdr="0" onmousedown="genManifest()">
+<cont>
+<a bbg mid-mb row bdr="25" onmousedown="genManifest()">
 <i m mid class="fa-solid fa-floppy-disk"></i>
 <p m agr bold>export</p>
 </a>
+</cont>
 
-</layout>
-<div></div>
-</span>
 </layout>
 <script>
 function ran(n) {
