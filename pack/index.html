@@ -1,0 +1,54 @@
+<neu>
+<script src="https://purpos.web.app/ui/sen.js"></script>
+<script setup>
+setSEO(); setViewport(); ui();
+</script>
+
+<body>
+  <page none m id="mainPage">
+    <cont none m>
+      <a button id="addUuidButton">Add UUID</a>
+    </cont>
+
+    <cont id="uuidContainer" none m></cont>
+
+    <cont>
+    <p id="statusText">Type: Resource</p>
+  <a button id="downloadButton">Save</a>
+  </cont>
+  </page>
+</body>
+
+<script back>
+let fileType = "resource";
+
+const addUuid = () => {
+  const uuidContainer = document.querySelector("#uuidContainer");
+  const uuidInput = document.createElement("textarea");
+  uuidInput.setAttribute("uuidInput", "");
+  uuidInput.placeholder = "UUID here";
+  uuidContainer.appendChild(uuidInput);
+};
+
+const downloadJson = () => {
+  const inputs = document.querySelectorAll("[uuidInput]");
+  const data = Array.from(inputs).map(input => ({
+    pack_id: input.value,
+    version: [1, 0, 0]
+  }));
+  newFile({ 
+    filename: `world_${fileType}_packs.json`, 
+    filetype: "application/json", 
+    data: JSON.stringify(data, null, 2)
+  });
+};
+
+document.querySelector("#addUuidButton").onclick = addUuid;
+document.querySelector("#downloadButton").onclick = downloadJson;
+
+document.querySelector("#statusText").onclick = () => {
+  fileType = (fileType === "resource") ? "behavior" : "resource";
+  document.querySelector("#statusText").innerText = `Type: ${fileType}`;
+};
+</script>
+</neu>
